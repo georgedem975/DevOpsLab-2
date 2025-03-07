@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    container_name: microblog
+    ports:
+      - "5000:5000"
+    environment:
+      - FLASK_APP=microblog.py
+      - DATABASE_URL=postgresql://user:password@db/microblog
+    volumes:
+      - ./app:/app
+      - ./migrations:/migrations
+      - app_data:/app_data
+    depends_on:
+      - db
+    networks:
+      - app_network
+    command: ["./boot.sh"]
+
+  db:
+    image: postgres:alpine
+    container_name: db
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: microblog
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    networks:
+      - app_network
+
+volumes:
+  db_data:
+  app_data:
+
+networks:
+  app_network:
+    driver: bridge
