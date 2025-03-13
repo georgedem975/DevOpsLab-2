@@ -2,13 +2,18 @@ version: '3.8'
 
 services:
   web:
-    build: .
+    build:
+      context: .
+      args:
+        FLASK_APP: ${FLASK_APP}
+        POSTGRES_USER: ${POSTGRES_USER}
+        POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+        POSTGRES_DB: ${POSTGRES_DB}
     container_name: microblog
     ports:
       - "5000:5000"
-    environment:
-      - FLASK_APP=microblog.py
-      - DATABASE_URL=postgresql://user:password@db/microblog
+    env_file: 
+      - .env
     volumes:
       - ./app:/app
       - ./migrations:/migrations
@@ -22,10 +27,8 @@ services:
   db:
     image: postgres:alpine
     container_name: db
-    environment:
-      POSTGRES_USER: user
-      POSTGRES_PASSWORD: password
-      POSTGRES_DB: microblog
+    env_file:
+      - .env
     volumes:
       - db_data:/var/lib/postgresql/data
     networks:

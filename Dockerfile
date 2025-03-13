@@ -1,6 +1,12 @@
 FROM python:3.9-alpine
 
-ENV FLASK_APP microblog.py
+ARG FLASK_APP
+ARG POSTGRES_USER
+ARG POSTGRES_PASSWORD
+ARG POSTGRES_DB
+
+ENV FLASK_APP=${FLASK_APP}
+ENV DATABASE_URL=postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db/${POSTGRES_DB}
 
 COPY requirements.txt requirements.txt
 
@@ -18,7 +24,7 @@ RUN mkdir logs && chown -R myuser:myuser logs
 
 COPY app app
 COPY migrations migrations
-COPY microblog.py config.py boot.sh ./ 
+COPY microblog.py config.py boot.sh ./
 
 RUN chmod +x boot.sh
 
