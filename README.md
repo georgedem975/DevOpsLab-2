@@ -20,7 +20,7 @@
 
 проект который был использован в данной лабораторной: [microblog](https://github.com/miguelgrinberg/microblog)
 
-В ходе лабораторной был исправлен [Dokerfile](https://github.com/georgedem975/DevOpsLab-2/blob/main/Dockerfile), для полного соответствия требованиям, а также добавлен [docker-compose.yml](https://github.com/georgedem975/DevOpsLab-2/blob/main/docker-compose.yml)
+В ходе лабораторной был исправлен [Dokerfile](https://github.com/georgedem975/DevOpsLab-2/blob/main/Dockerfile), для полного соответствия требованиям, а также добавлены [docker-compose.yml](https://github.com/georgedem975/DevOpsLab-2/blob/main/docker-compose.yml) и [.env](https://github.com/georgedem975/DevOpsLab-2/blob/main/.env)
 
 Работу выполнили: 
 * __Преображенский Георгий Сергеевич__ М34071
